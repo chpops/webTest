@@ -14,11 +14,9 @@
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
         }
-
         .container {
             text-align: center;
         }
-
         .input-field {
             width: 420px;
             height: 60px;
@@ -30,15 +28,12 @@
             transition: border-color 0.3s ease;
             box-sizing: border-box;
         }
-
         .input-field:focus {
             border-color: blue;
         }
-
         .input-field::placeholder {
             color: #a0a0a0;
         }
-
         .submit-button {
             display: block;
             margin-top: 20px;
@@ -52,7 +47,6 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
         .submit-button:hover {
             background-color: darkblue;
         }
@@ -63,20 +57,20 @@
         <textarea class="input-field" placeholder="Введите ваш вопрос/опишите вашу проблему"></textarea>
         <button class="submit-button">Поделиться</button>
     </div>
-
     <script>
-        document.querySelector('.submit-button').addEventListener('click', () => {
+        document.querySelector('.submit-button').addEventListener('click', async () => {
             const inputField = document.querySelector('.input-field');
             const userInput = inputField.value.trim();
-
             if (userInput) {
-                // Здесь можно добавить код для отправки запроса к ChatGPT API
-                console.log("Ваш вопрос/проблема:", userInput);
-
-                // Пример ответа от ChatGPT (замените его на реальный вызов API)
-                const response = "Это пример ответа от вашего личного психолога.";
-
-                alert(response);
+                const response = await fetch('/get_response', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question: userInput })
+                });
+                const data = await response.json();
+                alert(data.response);
             } else {
                 alert("Пожалуйста, введите ваш вопрос или опишите вашу проблему.");
             }
