@@ -1,80 +1,18 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini App - Личный Психолог</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-        .container {
-            text-align: center;
-        }
-        .input-field {
-            width: 420px;
-            height: 60px;
-            padding: 10px;
-            border: 2px solid transparent;
-            border-radius: 10px;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.3s ease;
-            box-sizing: border-box;
-        }
-        .input-field:focus {
-            border-color: blue;
-        }
-        .input-field::placeholder {
-            color: #a0a0a0;
-        }
-        .submit-button {
-            display: block;
-            margin-top: 20px;
-            width: 200px;
-            height: 60px;
-            background-color: blue;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .submit-button:hover {
-            background-color: darkblue;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPT Psychologist</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <textarea class="input-field" placeholder="Введите ваш вопрос/опишите вашу проблему"></textarea>
-        <button class="submit-button">Поделиться</button>
-    </div>
-    <script>
-        document.querySelector('.submit-button').addEventListener('click', async () => {
-            const inputField = document.querySelector('.input-field');
-            const userInput = inputField.value.trim();
-            if (userInput) {
-                const response = await fetch('/get_response', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ question: userInput })
-                });
-                const data = await response.json();
-                alert(data.response);
-            } else {
-                alert("Пожалуйста, введите ваш вопрос или опишите вашу проблему.");
-            }
-        });
-    </script>
+  <div class="container">
+    <h1>Personal Psychologist</h1>
+    <textarea id="requestField" placeholder="Enter your request here..."></textarea>
+    <button id="submitButton">OK</button>
+    <div id="response"></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
